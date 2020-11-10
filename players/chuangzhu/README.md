@@ -125,7 +125,7 @@ a='a=%r;import hashlib;print(hashlib.sha256((a%%a).encode()).hexdigest(),end="")
 
 ![Iterating over Unicode on Termux](https://i.loli.net/2020/11/07/O8V5sZf2hvujdS7.png)
 
-就是这个字符 `ﬂ`，它的 Unicode 码点是 `64258`，对应的大写是两个拉丁字母 `FL`。令我比较意外的是居然真的有这么一个字符~~，话说它被发明出来就是专门用来迫害程序员的吗~~。
+就是这个字符 `ﬂ`，它的 Unicode 码点是 `64258`，对应的大写是两个拉丁字母 `FL`。令我比较意外的是居然真的有这么一个字符 ~~，话说它被发明出来就是专门用来迫害程序员的吗~~。
 
 ### 233 同学的 UTF-7 字符串
 
@@ -191,7 +191,7 @@ In [2]: parse_latex('\int_2^3 \ln(x^2)')
 Out[2]: Integral(log(x**2, E), (x, 2, 3))
 ```
 
-页面中的 LaTeX 可以通过 `r'<p>$(.+)</p>'` 匹配。页面中的 LaTeX 中有 `\left` `\right` `\,` 这些仅用于指定格式的命令，`parse_latex` 无法识别，将他们替换为 `''`。登录的话用 `requests` 创建一个 `Session()` get 登录地址就可了。
+页面中的 LaTeX 可以通过 `r'<p> \$(.+)\$</p>'` 匹配。页面中的 LaTeX 中有 `\left` `\right` `\,` 这些仅用于指定格式的命令，`parse_latex` 无法识别，将他们替换为 `''`。登录的话用 `requests` 创建一个 `Session()` get 登录地址就可了。
 
 [完整代码见 Gist](https://gist.github.com/chuangzhu/343c82024382b4cdbd7cc22b952f98a3#file-flxg-20-py)。
 
@@ -410,13 +410,15 @@ with open('frames.tar', 'wb') as f:
 
 这题我一开始想复杂了，我不知道这里的信用卡也是可以向银行卡转账的，并且不限额度。一开始我还以外信用卡只能用来吃饭 \_(:з」∠)\_，所以我不管怎么改银行卡总利息都小于信用卡利息加饭钱。
 
-以 x 有 167 元存款的借记卡卡数，为 y 为每日净利润，则有：
+以 x 有 167 元存款的借记卡卡数，y 为每日净利润，则有：
+
 $$
 y = \begin{cases}
 x - 20, x < \frac{2000}{167}\\
 x - 167\times 0.005 x - 10, x \ge \frac{2000}{167}\\
 \end{cases}
 $$
+
 ![y-x](https://i.loli.net/2020/11/07/byKmjMsY4pW8DkR.png)
 
 ......可见卡越多日净利润越多，干脆申请 998 张借记卡，一张信用卡。每张借记卡从信用卡套现 167 元，这样每日都可净赚 164.505 元。用来还信用卡，还完后就开始赚钱了。后面我发现一直欠着账也行，系统算的是净资产，净资产大于 2000 时狗狗银行就会吐出 flag：
